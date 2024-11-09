@@ -9,6 +9,8 @@
 
 # dfx temporary files
 .dfx/
+dkeeper.old.did
+dkeeper.old.most
 
 # frontend code
 node_modules/
