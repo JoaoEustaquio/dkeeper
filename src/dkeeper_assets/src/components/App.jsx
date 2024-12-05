@@ -4,20 +4,26 @@ import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
 import {dkeeper} from "../../../declarations/dkeeper"
-
+ 
 function App() {
   const [notes, setNotes] = useState([]);
 
   function addNote(newNote) {
     setNotes(prevNotes => {
       dkeeper.createNote(newNote.title, newNote.content)
-      return [...prevNotes, newNote];
+      return [newNote, ...prevNotes,];
     });
   }
 
   useEffect(() => {
-    console.log("useEffect Called");
-  })
+    console.log("useEffect Called")
+    fetchData();
+  }, []);
+
+  async function fetchData() {
+    const notesArray = await dkeeper.readNotes();
+    setNotes(notesArray);
+  }
 
   function deleteNote(id) {
     setNotes(prevNotes => {
